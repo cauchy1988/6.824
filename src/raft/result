@@ -1,0 +1,1035 @@
+runLoop-Append start: 1
+runLoop-Append start: 0
+runLoop-Append me: 0
+runLoop-Append start: 4
+runLoop-Append me: 4
+runLoop-Append start: 3
+runLoop-Append me: 3
+runLoop-Append me: 1
+Test (2B): no agreement if too many followers disconnect ...
+runLoop-Append start: 2
+runLoop-Append me: 2
+me: 2  awake from sleep1.
+me: 2  awake from sleep2.
+me: 2  awake from sleep3.
+runLoop-Append start: 2
+runLoop-Append me: 2
+runLoop vote req_args: {1 2 0 0} , idx: 3 , leaderIndex: -1 , term: 1
+runLoop vote req_args: {1 2 0 0} , idx: 4 , leaderIndex: -1 , term: 1
+runLoop vote req_args: {1 2 0 0} , idx: 0 , leaderIndex: -1 , term: 1
+runLoop vote req_args: {1 2 0 0} , idx: 1 , leaderIndex: -1 , term: 1
+RequestVote me: 0 , args: {1 2 0 0} , leaderIndex: -1 , term: 0
+RequestVote me: 3 , args: {1 2 0 0} , leaderIndex: -1 , term: 0
+RequestVote me: 1 , args: {1 2 0 0} , leaderIndex: -1 , term: 0
+RequestVote me: 4 , args: {1 2 0 0} , leaderIndex: -1 , term: 0
+me: 2 , to be a leader.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+me: 4  awake from sleep1.
+me: 4  awake from sleep2.
+runLoop-Append start: 4
+runLoop-Append me: 4
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+me: 3  awake from sleep1.
+me: 3  awake from sleep2.
+runLoop-Append start: 3
+runLoop-Append me: 3
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+me: 0  awake from sleep1.
+me: 0  awake from sleep2.
+runLoop-Append start: 0
+runLoop-Append me: 0
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+leader: 2 , end commit loop.
+me: 2  awake from sleep1.
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 0 0 [{1 10}] 0} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 0 0 [{1 10}] 0} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 0 0 [{1 10}] 0} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 0 0 [{1 10}] 0} , idx: 1 , leaderIndex: 2 , term: 1
+AppendEntries me: 4 , args: {1 2 0 0 [{1 10}] 0} , leaderIndex: -1 , term: 1 , commitIndex: 0
+AppendEntries me: 3 , args: {1 2 0 0 [{1 10}] 0} , leaderIndex: -1 , term: 1 , commitIndex: 0
+AppendEntries me: 1 , args: {1 2 0 0 [{1 10}] 0} , leaderIndex: -1 , term: 1 , commitIndex: 0
+runLoop-Append append_args: {1 2 0 0 [{1 10}] 0} , idx: 4 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+AppendEntries me: 0 , args: {1 2 0 0 [{1 10}] 0} , leaderIndex: -1 , term: 1 , commitIndex: 0
+runLoop-Append append_args: {1 2 0 0 [{1 10}] 0} , idx: 3 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+runLoop-Append append_args: {1 2 0 0 [{1 10}] 0} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+runLoop-Append append_args: {1 2 0 0 [{1 10}] 0} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 1 ， commit idx: 0
+ before send channel leader: 2 , CommandIndex: 1
+ after send channel leader: 2 , CommandIndex: 1
+leader: 2 , end commit loop.
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+AppendEntries me: 4 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 0
+AppendEntries me: 0 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 0
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 4 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+AppendEntries me: 3 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 0
+AppendEntries me: 1 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 0
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 3 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+me: 4  awake from sleep1.
+me: 4  awake from sleep2.
+runLoop-Append start: 4
+runLoop-Append me: 4
+me: 3  awake from sleep1.
+me: 3  awake from sleep2.
+runLoop-Append start: 3
+runLoop-Append me: 3
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+AppendEntries me: 4 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+AppendEntries me: 0 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+AppendEntries me: 3 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 4 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+AppendEntries me: 1 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 3 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+me: 0  awake from sleep1.
+me: 0  awake from sleep2.
+runLoop-Append start: 0
+runLoop-Append me: 0
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+AppendEntries me: 4 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+AppendEntries me: 0 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 4 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+AppendEntries me: 3 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+AppendEntries me: 1 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 3 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+AppendEntries me: 4 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+AppendEntries me: 3 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+AppendEntries me: 0 , args: {1 2 1 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 3 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 4 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+runLoop-Append append_args: {1 2 1 1 [] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+me: 4  awake from sleep1.
+me: 4  awake from sleep2.
+runLoop-Append start: 4
+runLoop-Append me: 4
+me: 3  awake from sleep1.
+me: 3  awake from sleep2.
+runLoop-Append start: 3
+runLoop-Append me: 3
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 1 1 [{1 20}] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 0  awake from sleep1.
+me: 0  awake from sleep2.
+runLoop-Append start: 0
+runLoop-Append me: 0
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 4  awake from sleep1.
+me: 4  awake from sleep2.
+me: 4  awake from sleep3.
+runLoop-Append start: 4
+runLoop-Append me: 4
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop vote req_args: {2 4 1 1} , idx: 2 , leaderIndex: -1 , term: 2
+runLoop vote req_args: {2 4 1 1} , idx: 1 , leaderIndex: -1 , term: 2
+runLoop vote req_args: {2 4 1 1} , idx: 3 , leaderIndex: -1 , term: 2
+runLoop vote req_args: {2 4 1 1} , idx: 0 , leaderIndex: -1 , term: 2
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 3  awake from sleep1.
+me: 3  awake from sleep2.
+me: 3  awake from sleep3.
+runLoop-Append start: 3
+runLoop-Append me: 3
+runLoop vote req_args: {2 3 1 1} , idx: 4 , leaderIndex: -1 , term: 2
+runLoop vote req_args: {2 3 1 1} , idx: 1 , leaderIndex: -1 , term: 2
+runLoop vote req_args: {2 3 1 1} , idx: 2 , leaderIndex: -1 , term: 2
+runLoop vote req_args: {2 3 1 1} , idx: 0 , leaderIndex: -1 , term: 2
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 0  awake from sleep1.
+me: 0  awake from sleep2.
+me: 0  awake from sleep3.
+runLoop-Append start: 0
+runLoop-Append me: 0
+runLoop vote req_args: {2 0 1 1} , idx: 4 , leaderIndex: -1 , term: 2
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop vote req_args: {2 0 1 1} , idx: 2 , leaderIndex: -1 , term: 2
+runLoop vote req_args: {2 0 1 1} , idx: 1 , leaderIndex: -1 , term: 2
+runLoop vote req_args: {2 0 1 1} , idx: 3 , leaderIndex: -1 , term: 2
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 4  awake from sleep1.
+me: 4  awake from sleep2.
+me: 4  awake from sleep3.
+runLoop-Append start: 4
+runLoop-Append me: 4
+runLoop vote req_args: {3 4 1 1} , idx: 3 , leaderIndex: -1 , term: 3
+runLoop vote req_args: {3 4 1 1} , idx: 1 , leaderIndex: -1 , term: 3
+runLoop vote req_args: {3 4 1 1} , idx: 0 , leaderIndex: -1 , term: 3
+runLoop vote req_args: {3 4 1 1} , idx: 2 , leaderIndex: -1 , term: 3
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 3  awake from sleep1.
+me: 3  awake from sleep2.
+me: 3  awake from sleep3.
+runLoop-Append start: 3
+runLoop-Append me: 3
+runLoop vote req_args: {3 3 1 1} , idx: 1 , leaderIndex: -1 , term: 3
+runLoop vote req_args: {3 3 1 1} , idx: 0 , leaderIndex: -1 , term: 3
+runLoop vote req_args: {3 3 1 1} , idx: 2 , leaderIndex: -1 , term: 3
+runLoop vote req_args: {3 3 1 1} , idx: 4 , leaderIndex: -1 , term: 3
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{0 false}
+me: 0  awake from sleep1.
+me: 0  awake from sleep2.
+me: 0  awake from sleep3.
+runLoop-Append start: 0
+runLoop-Append me: 0
+runLoop vote req_args: {3 0 1 1} , idx: 4 , leaderIndex: -1 , term: 3
+runLoop vote req_args: {3 0 1 1} , idx: 2 , leaderIndex: -1 , term: 3
+runLoop vote req_args: {3 0 1 1} , idx: 1 , leaderIndex: -1 , term: 3
+runLoop vote req_args: {3 0 1 1} , idx: 3 , leaderIndex: -1 , term: 3
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 4  awake from sleep1.
+me: 4  awake from sleep2.
+me: 4  awake from sleep3.
+runLoop-Append start: 4
+runLoop-Append me: 4
+runLoop vote req_args: {4 4 1 1} , idx: 1 , leaderIndex: -1 , term: 4
+runLoop vote req_args: {4 4 1 1} , idx: 0 , leaderIndex: -1 , term: 4
+runLoop vote req_args: {4 4 1 1} , idx: 2 , leaderIndex: -1 , term: 4
+runLoop vote req_args: {4 4 1 1} , idx: 3 , leaderIndex: -1 , term: 4
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1 , reply: &{0 false}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 3  awake from sleep1.
+me: 3  awake from sleep2.
+me: 3  awake from sleep3.
+runLoop-Append start: 3
+runLoop-Append me: 3
+runLoop vote req_args: {4 3 1 1} , idx: 1 , leaderIndex: -1 , term: 4
+runLoop vote req_args: {4 3 1 1} , idx: 0 , leaderIndex: -1 , term: 4
+runLoop vote req_args: {4 3 1 1} , idx: 2 , leaderIndex: -1 , term: 4
+runLoop vote req_args: {4 3 1 1} , idx: 4 , leaderIndex: -1 , term: 4
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 0  awake from sleep1.
+me: 0  awake from sleep2.
+me: 0  awake from sleep3.
+runLoop-Append start: 0
+runLoop-Append me: 0
+runLoop vote req_args: {4 0 1 1} , idx: 4 , leaderIndex: -1 , term: 4
+runLoop vote req_args: {4 0 1 1} , idx: 2 , leaderIndex: -1 , term: 4
+runLoop vote req_args: {4 0 1 1} , idx: 1 , leaderIndex: -1 , term: 4
+runLoop vote req_args: {4 0 1 1} , idx: 3 , leaderIndex: -1 , term: 4
+me: 4  awake from sleep1.
+me: 4  awake from sleep2.
+me: 4  awake from sleep3.
+runLoop-Append start: 4
+runLoop-Append me: 4
+runLoop vote req_args: {5 4 1 1} , idx: 3 , leaderIndex: -1 , term: 5
+runLoop vote req_args: {5 4 1 1} , idx: 1 , leaderIndex: -1 , term: 5
+runLoop vote req_args: {5 4 1 1} , idx: 2 , leaderIndex: -1 , term: 5
+runLoop vote req_args: {5 4 1 1} , idx: 0 , leaderIndex: -1 , term: 5
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{0 false}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 3  awake from sleep1.
+me: 3  awake from sleep2.
+me: 3  awake from sleep3.
+runLoop-Append start: 3
+runLoop-Append me: 3
+runLoop vote req_args: {5 3 1 1} , idx: 4 , leaderIndex: -1 , term: 5
+runLoop vote req_args: {5 3 1 1} , idx: 1 , leaderIndex: -1 , term: 5
+runLoop vote req_args: {5 3 1 1} , idx: 2 , leaderIndex: -1 , term: 5
+runLoop vote req_args: {5 3 1 1} , idx: 0 , leaderIndex: -1 , term: 5
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{0 false}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{0 false}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 4  awake from sleep1.
+me: 4  awake from sleep2.
+me: 4  awake from sleep3.
+runLoop-Append start: 4
+runLoop-Append me: 4
+runLoop vote req_args: {6 4 1 1} , idx: 0 , leaderIndex: -1 , term: 6
+runLoop vote req_args: {6 4 1 1} , idx: 2 , leaderIndex: -1 , term: 6
+runLoop vote req_args: {6 4 1 1} , idx: 3 , leaderIndex: -1 , term: 6
+runLoop vote req_args: {6 4 1 1} , idx: 1 , leaderIndex: -1 , term: 6
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 0  awake from sleep1.
+me: 0  awake from sleep2.
+me: 0  awake from sleep3.
+runLoop-Append start: 0
+runLoop-Append me: 0
+runLoop vote req_args: {5 0 1 1} , idx: 4 , leaderIndex: -1 , term: 5
+runLoop vote req_args: {5 0 1 1} , idx: 1 , leaderIndex: -1 , term: 5
+runLoop vote req_args: {5 0 1 1} , idx: 2 , leaderIndex: -1 , term: 5
+runLoop vote req_args: {5 0 1 1} , idx: 3 , leaderIndex: -1 , term: 5
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 3  awake from sleep1.
+me: 3  awake from sleep2.
+me: 3  awake from sleep3.
+runLoop-Append start: 3
+runLoop-Append me: 3
+runLoop vote req_args: {6 3 1 1} , idx: 1 , leaderIndex: -1 , term: 6
+runLoop vote req_args: {6 3 1 1} , idx: 0 , leaderIndex: -1 , term: 6
+runLoop vote req_args: {6 3 1 1} , idx: 2 , leaderIndex: -1 , term: 6
+runLoop vote req_args: {6 3 1 1} , idx: 4 , leaderIndex: -1 , term: 6
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{0 false}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1 , reply: &{1 true}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{0 false}
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+leader: 2 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 2 , end commit loop.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me leader: 2
+runLoop-Append me leader end1: 2
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1
+AppendEntries me: 4 , args: {1 2 1 1 [{1 20}] 1} , leaderIndex: -1 , term: 6 , commitIndex: 1
+AppendEntries me: 3 , args: {1 2 1 1 [{1 20}] 1} , leaderIndex: -1 , term: 6 , commitIndex: 1
+AppendEntries me: 0 , args: {1 2 1 1 [{1 20}] 1} , leaderIndex: -1 , term: 5 , commitIndex: 1
+AppendEntries me: 1 , args: {1 2 2 1 [] 1} , leaderIndex: 2 , term: 1 , commitIndex: 1
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 3 , leaderIndex: 2 , term: 1 , reply: &{6 false}
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 0 , leaderIndex: 2 , term: 1 , reply: &{5 false}
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 2 , term: 1 , reply: &{6 false}
+runLoop-Append append_args: {1 2 2 1 [] 1} , idx: 1 , leaderIndex: -1 , term: 6 , reply: &{1 true}
+me: 4  awake from sleep1.
+me: 4  awake from sleep2.
+me: 4  awake from sleep3.
+runLoop-Append start: 4
+runLoop-Append me: 4
+runLoop vote req_args: {7 4 1 1} , idx: 3 , leaderIndex: -1 , term: 7
+runLoop vote req_args: {7 4 1 1} , idx: 1 , leaderIndex: -1 , term: 7
+runLoop vote req_args: {7 4 1 1} , idx: 0 , leaderIndex: -1 , term: 7
+runLoop vote req_args: {7 4 1 1} , idx: 2 , leaderIndex: -1 , term: 7
+RequestVote me: 3 , args: {7 4 1 1} , leaderIndex: -1 , term: 6
+RequestVote me: 1 , args: {7 4 1 1} , leaderIndex: 2 , term: 1
+RequestVote me: 0 , args: {7 4 1 1} , leaderIndex: -1 , term: 5
+RequestVote me: 2 , args: {7 4 1 1} , leaderIndex: -1 , term: 6
+me: 4 , to be a leader.
+runLoop-Append me leader end2: 2
+runLoop-Append start: 2
+runLoop-Append me: 2
+me: 0  awake from sleep1.
+me: 0  awake from sleep2.
+runLoop-Append start: 0
+runLoop-Append me: 0
+me: 3  awake from sleep1.
+me: 3  awake from sleep2.
+runLoop-Append start: 3
+runLoop-Append me: 3
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+me: 4  awake from sleep1.
+runLoop-Append start: 4
+runLoop-Append me leader: 4
+runLoop-Append me leader end1: 4
+runLoop-Append append_args: {7 4 1 1 [] 1} , idx: 3 , leaderIndex: 4 , term: 7
+runLoop-Append append_args: {7 4 1 1 [] 1} , idx: 0 , leaderIndex: 4 , term: 7
+runLoop-Append append_args: {7 4 1 1 [] 1} , idx: 1 , leaderIndex: 4 , term: 7
+runLoop-Append append_args: {7 4 1 1 [] 1} , idx: 2 , leaderIndex: 4 , term: 7
+AppendEntries me: 3 , args: {7 4 1 1 [] 1} , leaderIndex: -1 , term: 7 , commitIndex: 1
+AppendEntries me: 1 , args: {7 4 1 1 [] 1} , leaderIndex: -1 , term: 7 , commitIndex: 1
+AppendEntries me: 0 , args: {7 4 1 1 [] 1} , leaderIndex: -1 , term: 7 , commitIndex: 1
+AppendEntries me: 2 , args: {7 4 1 1 [] 1} , leaderIndex: -1 , term: 7 , commitIndex: 1
+runLoop-Append append_args: {7 4 1 1 [] 1} , idx: 1 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+runLoop-Append append_args: {7 4 1 1 [] 1} , idx: 0 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+runLoop-Append append_args: {7 4 1 1 [] 1} , idx: 3 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+runLoop-Append append_args: {7 4 1 1 [] 1} , idx: 2 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+me: 2  awake from sleep1.
+me: 2  awake from sleep2.
+runLoop-Append start: 2
+runLoop-Append me: 2
+leader: 4 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 4 , end commit loop.
+leader: 4 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 4 , end commit loop.
+leader: 4 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 4 , end commit loop.
+leader: 4 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 4 , end commit loop.
+leader: 4 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 4 , end commit loop.
+leader: 4 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 4 , end commit loop.
+leader: 4 , start commit loop, try_idx: 2 ， commit idx: 1
+leader: 4 , end commit loop.
+runLoop-Append me leader end2: 4
+runLoop-Append start: 4
+runLoop-Append me leader: 4
+runLoop-Append me leader end1: 4
+runLoop-Append append_args: {7 4 1 1 [{7 30} {7 1000}] 1} , idx: 2 , leaderIndex: 4 , term: 7
+runLoop-Append append_args: {7 4 1 1 [{7 30} {7 1000}] 1} , idx: 0 , leaderIndex: 4 , term: 7
+runLoop-Append append_args: {7 4 1 1 [{7 30} {7 1000}] 1} , idx: 3 , leaderIndex: 4 , term: 7
+runLoop-Append append_args: {7 4 1 1 [{7 30} {7 1000}] 1} , idx: 1 , leaderIndex: 4 , term: 7
+AppendEntries me: 2 , args: {7 4 1 1 [{7 30} {7 1000}] 1} , leaderIndex: 4 , term: 7 , commitIndex: 1
+AppendEntries me: 0 , args: {7 4 1 1 [{7 30} {7 1000}] 1} , leaderIndex: 4 , term: 7 , commitIndex: 1
+AppendEntries me: 3 , args: {7 4 1 1 [{7 30} {7 1000}] 1} , leaderIndex: 4 , term: 7 , commitIndex: 1
+runLoop-Append append_args: {7 4 1 1 [{7 30} {7 1000}] 1} , idx: 0 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+runLoop-Append append_args: {7 4 1 1 [{7 30} {7 1000}] 1} , idx: 2 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+AppendEntries me: 1 , args: {7 4 1 1 [{7 30} {7 1000}] 1} , leaderIndex: 4 , term: 7 , commitIndex: 1
+runLoop-Append append_args: {7 4 1 1 [{7 30} {7 1000}] 1} , idx: 3 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+runLoop-Append append_args: {7 4 1 1 [{7 30} {7 1000}] 1} , idx: 1 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+leader: 4 , start commit loop, try_idx: 2 ， commit idx: 1
+ before send channel leader: 4 , CommandIndex: 2
+ after send channel leader: 4 , CommandIndex: 2
+leader: 4 , end commit loop.
+me: 3  awake from sleep1.
+me: 3  awake from sleep2.
+runLoop-Append start: 3
+runLoop-Append me: 3
+leader: 4 , start commit loop, try_idx: 3 ， commit idx: 2
+ before send channel leader: 4 , CommandIndex: 3
+ after send channel leader: 4 , CommandIndex: 3
+leader: 4 , end commit loop.
+runLoop-Append append_args: {1 2 1 1 [{1 20}] 1} , idx: 4 , leaderIndex: 4 , term: 7 , reply: &{0 false}
+me: 0  awake from sleep1.
+me: 0  awake from sleep2.
+runLoop-Append start: 0
+runLoop-Append me: 0
+me: 1  awake from sleep1.
+me: 1  awake from sleep2.
+runLoop-Append start: 1
+runLoop-Append me: 1
+runLoop-Append me leader end2: 4
+runLoop-Append start: 4
+runLoop-Append me leader: 4
+runLoop-Append me leader end1: 4
+runLoop-Append append_args: {7 4 3 7 [] 3} , idx: 3 , leaderIndex: 4 , term: 7
+runLoop-Append append_args: {7 4 3 7 [] 3} , idx: 1 , leaderIndex: 4 , term: 7
+runLoop-Append append_args: {7 4 3 7 [] 3} , idx: 0 , leaderIndex: 4 , term: 7
+runLoop-Append append_args: {7 4 3 7 [] 3} , idx: 2 , leaderIndex: 4 , term: 7
+AppendEntries me: 3 , args: {7 4 3 7 [] 3} , leaderIndex: 4 , term: 7 , commitIndex: 1
+AppendEntries me: 1 , args: {7 4 3 7 [] 3} , leaderIndex: 4 , term: 7 , commitIndex: 1
+AppendEntries me: 2 , args: {7 4 3 7 [] 3} , leaderIndex: 4 , term: 7 , commitIndex: 1
+AppendEntries me: 0 , args: {7 4 3 7 [] 3} , leaderIndex: 4 , term: 7 , commitIndex: 1
+runLoop-Append append_args: {7 4 3 7 [] 3} , idx: 3 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+runLoop-Append append_args: {7 4 3 7 [] 3} , idx: 2 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+runLoop-Append append_args: {7 4 3 7 [] 3} , idx: 1 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+runLoop-Append append_args: {7 4 3 7 [] 3} , idx: 0 , leaderIndex: 4 , term: 7 , reply: &{7 true}
+  ... Passed --   3.9  5  168   32470    3
+PASS
+ok  	raft	3.881s
