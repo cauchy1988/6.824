@@ -19,7 +19,7 @@ package raft
 
 import (
 	"bytes"
-	"fmt"
+	// "fmt"
 	"labgob"
 	"sync"
 )
@@ -80,7 +80,7 @@ type Raft struct {
 
 	// volatile states for all servers
 	commitIndex int
-	lastApplied int
+	LastApplied int32
 
 	// volatile states for leader
 	nextIndex map[int] int
@@ -149,7 +149,7 @@ func (rf *Raft) readPersist(data []byte) {
 	var vote_info map[int] int = map[int] int{}
 	var log []LogEntry = []LogEntry{}
 	if d.Decode(&term) != nil || d.Decode(&vote_info) != nil || d.Decode(&log) != nil{
-		fmt.Println("readPersist error.")
+		// fmt.Println("readPersist error.")
 	} else {
 		rf.currentTerm = term
 		rf.votedFor = vote_info
@@ -190,7 +190,7 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
 
-	fmt.Println("RequestVote me:", rf.me, ", args:", *args, ", leaderIndex:", rf.leaderIndex, ", term:", rf.currentTerm)
+	// fmt.Println("RequestVote me:", rf.me, ", args:", *args, ", leaderIndex:", rf.leaderIndex, ", term:", rf.currentTerm)
 
 	changed := false
 	defer func() {
@@ -241,7 +241,7 @@ type AppendEntriesReply struct {
 }
 
 func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply) {
-	fmt.Println("AppendEntries me:", rf.me, ", args:", *args, ", leaderIndex:", rf.leaderIndex, ", term:", rf.currentTerm, ", commitIndex:", rf.commitIndex)
+	// fmt.Println("AppendEntries me:", rf.me, ", args:", *args, ", leaderIndex:", rf.leaderIndex, ", term:", rf.currentTerm, ", commitIndex:", rf.commitIndex)
 
 	rf.mu.Lock()
 	defer rf.mu.Unlock()
@@ -428,7 +428,7 @@ func (rf *Raft)commitLoop() {
 				try_idx++
 			}
 			if try_idx <= len(rf.log) {
-				fmt.Println("leader:", rf.me, ", start commit loop, try_idx:", try_idx, "， commit idx:", rf.commitIndex)
+				// fmt.Println("leader:", rf.me, ", start commit loop, try_idx:", try_idx, "， commit idx:", rf.commitIndex)
 
 				count := 0
 				for j := 0; j < len(rf.peers); j++ {
@@ -444,14 +444,14 @@ func (rf *Raft)commitLoop() {
 					for i := rf.commitIndex + 1; i <= try_idx; i++ {
 						apply_msg.Command = rf.log[i - 1].Command
 						apply_msg.CommandIndex = i
-						fmt.Println(" before send channel leader:", rf.me, ", CommandIndex:", apply_msg.CommandIndex)
+						// fmt.Println(" before send channel leader:", rf.me, ", CommandIndex:", apply_msg.CommandIndex)
 						rf.applyCh <- apply_msg
-						fmt.Println(" after send channel leader:", rf.me, ", CommandIndex:", apply_msg.CommandIndex)
+						// fmt.Println(" after send channel leader:", rf.me, ", CommandIndex:", apply_msg.CommandIndex)
 					}
 					rf.commitIndex = try_idx
 				}
 
-				fmt.Println("leader:", rf.me, ", end commit loop.")
+				// fmt.Println("leader:", rf.me, ", end commit loop.")
 			}
 		}
 		rf.mu.Unlock()
@@ -462,9 +462,9 @@ func (rf *Raft)commitLoop() {
 
 func (rf *Raft)runLoop() {
 	for !rf.killed() {
-		fmt.Println("runLoop-Append start:", rf.me)
+		// fmt.Println("runLoop-Append start:", rf.me)
 		if tmp_term, is_leader := rf.GetState(); is_leader {
-			fmt.Println("runLoop-Append me leader:", rf.me)
+			// fmt.Println("runLoop-Append me leader:", rf.me)
 			for i := 0; i < len(rf.peers); i++ {
 				if i != rf.me {
 					go func(idx int) {
@@ -489,12 +489,12 @@ func (rf *Raft)runLoop() {
 
 						rf.mu.Unlock()
 
-						fmt.Println("runLoop-Append append_args:", *append_args, ", idx:", idx, ", leaderIndex:", rf.leaderIndex, ", term:", rf.currentTerm)
+						// fmt.Println("runLoop-Append append_args:", *append_args, ", idx:", idx, ", leaderIndex:", rf.leaderIndex, ", term:", rf.currentTerm)
 
 						append_reply := &AppendEntriesReply{}
 						ret := rf.sendAppendEntries(idx, append_args, append_reply)
 
-						fmt.Println("runLoop-Append append_args:", *append_args, ", idx:", idx, ", leaderIndex:", rf.leaderIndex, ", term:", rf.currentTerm, ", reply:", append_reply)
+						// fmt.Println("runLoop-Append append_args:", *append_args, ", idx:", idx, ", leaderIndex:", rf.leaderIndex, ", term:", rf.currentTerm, ", reply:", append_reply)
 
 						if !ret {
 							append_reply.Success = false
@@ -534,22 +534,22 @@ func (rf *Raft)runLoop() {
 				}
 			}
 
-			fmt.Println("runLoop-Append me leader end1:", rf.me)
+			// fmt.Println("runLoop-Append me leader end1:", rf.me)
 			time.Sleep(105 * time.Millisecond)
-			fmt.Println("runLoop-Append me leader end2:", rf.me)
+			// fmt.Println("runLoop-Append me leader end2:", rf.me)
 		} else {
-			fmt.Println("runLoop-Append me:", rf.me)
+			// fmt.Println("runLoop-Append me:", rf.me)
 			time.Sleep(time.Duration(rf.electionElapsedTime) * time.Millisecond)
 
 			rf.mu.Lock()
-			fmt.Println("me:", rf.me, " awake from sleep1.")
+			// fmt.Println("me:", rf.me, " awake from sleep1.")
 
 			if rf.leaderIndex == rf.me {
 				rf.mu.Unlock()
 				continue
 			}
 
-			fmt.Println("me:", rf.me, " awake from sleep2.")
+			// fmt.Println("me:", rf.me, " awake from sleep2.")
 
 			be_called := rf.bCalled
 			if be_called {
@@ -558,7 +558,7 @@ func (rf *Raft)runLoop() {
 				continue
 			}
 
-			fmt.Println("me:", rf.me, " awake from sleep3.")
+			//  fmt.Println("me:", rf.me, " awake from sleep3.")
 
 			rf.leaderIndex = -1
 			rf.currentTerm++
@@ -589,7 +589,7 @@ func (rf *Raft)runLoop() {
 					for i := 0; i < len(rf.peers); i++ {
 						if i != rf.me {
 							go func(idx int) {
-								fmt.Println("runLoop vote req_args:", *req_args, ", idx:", idx, ", leaderIndex:", rf.leaderIndex, ", term:", rf.currentTerm)
+								// fmt.Println("runLoop vote req_args:", *req_args, ", idx:", idx, ", leaderIndex:", rf.leaderIndex, ", term:", rf.currentTerm)
 
 								req_reply := &RequestVoteReply{}
 								ret := rf.sendRequestVote(idx, req_args, req_reply)
@@ -610,7 +610,7 @@ func (rf *Raft)runLoop() {
 							if atomic.LoadInt32(&vote_granted_num) > int32(len(rf.peers) / 2) {
 								rf.mu.Lock()
 								if candidate_term == rf.currentTerm  && rf.leaderIndex != rf.me{
-									fmt.Println("me:", rf.me, ", to be a leader.")
+									// fmt.Println("me:", rf.me, ", to be a leader.")
 									rf.nextIndex = map[int] int{}
 									rf.matchIndex = map[int] int{}
 									for j := 0; j < len(rf.peers); j++ {
@@ -628,7 +628,7 @@ func (rf *Raft)runLoop() {
 						} else {
 							rf.mu.Lock()
 							if one_reply.Term > rf.currentTerm {
-								fmt.Println("me:", rf.me, ", to be reset.")
+								// fmt.Println("me:", rf.me, ", to be reset.")
 
 								rf.currentTerm = one_reply.Term
 								rf.leaderIndex = -1
@@ -672,7 +672,7 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// volatile states for all servers
 	rf.commitIndex = 0
-	rf.lastApplied = 0
+	rf.LastApplied = 0
 
 	rf.leaderIndex = -1;
 

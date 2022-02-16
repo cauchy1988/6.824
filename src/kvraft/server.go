@@ -7,6 +7,8 @@ import (
 	"raft"
 	"sync"
 	"sync/atomic"
+	"time"
+	// "fmt"
 )
 
 const Debug = 0
@@ -23,6 +25,11 @@ type Op struct {
 	// Your definitions here.
 	// Field names must start with capital letters,
 	// otherwise RPC will break.
+	OpType     string
+	Key        string
+	Value      string
+	ClientIdx  int32
+	RequestIdx int32
 }
 
 type KVServer struct {
@@ -35,15 +42,149 @@ type KVServer struct {
 	maxraftstate int // snapshot if log grows this big
 
 	// Your definitions here.
+	innerMap map[string]string
+
+	clientErrMap       map[int32]Err
+	clientValueMap     map[int32]string
+	clientRequestIdMap map[int32]int32
 }
 
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	// Your code here.
+	// fmt.Println("Get Handler: args-", args)
+
+	{
+		kv.mu.Lock()
+		_, ok := kv.clientErrMap[args.ClientId]
+		_, ok1 :=kv.clientRequestIdMap[args.ClientId]
+		if ok  && ok1 && kv.clientRequestIdMap[args.ClientId] == args.RequestId {
+			reply.Err = kv.clientErrMap[clientIdx]
+			if reply.Err == OK {
+				reply.Value = kv.clientValueMap[args.ClientId]
+			}
+			kv.mu.Unlock()
+			return
+		}
+		kv.mu.Unlock()
+	}
+
+	tmpIndex, tmpTerm, tmpLeader := kv.rf.Start(Op{Key: args.Key, OpType: "Get", ClientIdx: args.ClientId, RequestIdx: args.RequestId})
+	if !tmpLeader {
+		reply.Err = ErrWrongLeader
+		return
+	}
+
+	//  fmt.Println("Get Handler: tmpIndex-", tmpIndex, ", tmpLeader:", tmpLeader,  "lastApplied:", kv.rf.LastApplied)
+
+	term, isLeader := kv.rf.GetState()
+	for !kv.killed() && isLeader && term == tmpTerm && atomic.LoadInt32(&kv.rf.LastApplied) < int32(tmpIndex){
+		// time.Sleep(time.Duration(10) * time.Millisecond)
+		term, isLeader = kv.rf.GetState()
+		//  fmt.Println("Get Handler loop: tmpIndex-", tmpIndex, ", tmpLeader:", tmpLeader,  "lastApplied:", kv.rf.LastApplied)
+	}
+
+	if !isLeader || kv.killed() || term != tmpTerm {
+		reply.Err = ErrWrongLeader
+		return
+	}
+
+	term, isLeader = kv.rf.GetState()
+	if !isLeader || term != tmpTerm {
+		reply.Err = ErrWrongLeader
+		return
+	}
+
+	{
+		kv.mu.Lock()
+		reply.Err = kv.clientErrMap[args.ClientId]
+		reply.Value = kv.clientValueMap[args.ClientId]
+		// fmt.Println("args-requestid:", args.RequestId, ", realRequestId:", kv.clientRequestIdMap[args.ClientId])
+		kv.mu.Unlock()
+	}
 }
 
 func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	// Your code here.
+	// fmt.Println("Put Handler: args-", args)
+	{
+		kv.mu.Lock()
+		_, ok := kv.clientErrMap[args.ClientId]
+		_, ok1 :=kv.clientRequestIdMap[args.ClientId]
+		if ok  && ok1 && kv.clientRequestIdMap[args.ClientId] == args.RequestId {
+			reply.Err = kv.clientErrMap[clientIdx]
+			kv.mu.Unlock()
+			return
+		}
+		kv.mu.Unlock()
+	}
+
+	tmpIndex, tmpTerm, tmpLeader := kv.rf.Start(Op{Key: args.Key, Value: args.Value, OpType: args.Op, ClientIdx: args.ClientId, RequestIdx: args.RequestId})
+	if !tmpLeader {
+		reply.Err = ErrWrongLeader
+		return
+	}
+
+	// fmt.Println("Put Handler: tmpIndex-", tmpIndex, ", tmpLeader:", tmpLeader,  "lastApplied:", kv.rf.LastApplied)
+
+	term, isLeader := kv.rf.GetState()
+	for !kv.killed() && isLeader && term == tmpTerm && atomic.LoadInt32(&kv.rf.LastApplied) < int32(tmpIndex){
+		// time.Sleep(time.Duration(10) * time.Millisecond)
+		term, isLeader = kv.rf.GetState()
+		// fmt.Println("Put Handler loop: tmpIndex-", tmpIndex, ", tmpLeader:", tmpLeader,  "lastApplied:", kv.rf.LastApplied)
+	}
+
+	if !isLeader || kv.killed() || term != tmpTerm {
+		reply.Err = ErrWrongLeader
+		return
+	}
+
+	term, isLeader = kv.rf.GetState()
+	if !isLeader || term != tmpTerm {
+		reply.Err = ErrWrongLeader
+		return
+	}
+
+	reply.Err = OK
+}
+
+func (kv *KVServer) ApplyLoop() {
+	for !kv.killed() {
+		appMsg := <-kv.applyCh
+		op := appMsg.Command.(Op)
+		index := appMsg.CommandIndex
+
+		if "Put" == op.OpType {
+			kv.innerMap[op.Key] = op.Value
+		} else if "Append" == op.OpType {
+			if value, ok := kv.innerMap[op.Key]; ok {
+				kv.innerMap[op.Key] = value + op.Value
+			} else {
+				kv.innerMap[op.Key] = op.Value
+			}
+		}
+
+		{
+			kv.mu.Lock()
+			kv.clientErrMap[op.ClientIdx] = OK
+			kv.clientRequestIdMap[op.ClientIdx] = op.RequestIdx
+			if "Get" == op.OpType {
+				if value, ok := kv.innerMap[op.Key]; ok {
+					kv.clientValueMap[op.ClientIdx] = value
+				} else {
+					kv.clientErrMap[op.ClientIdx] = ErrNoKey
+					kv.clientValueMap[op.ClientIdx] = ""
+				}
+			}
+			kv.mu.Unlock()
+		}
+
+		if !atomic.CompareAndSwapInt32(&kv.rf.LastApplied, int32(index) - 1, int32(index)) {
+			panic("Fatal Error: lastApplied not apply in sequence!!!")
+		}
+
+		time.Sleep(10 * time.Millisecond)
+	}
 }
 
 //
@@ -96,6 +237,12 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.rf = raft.Make(servers, me, persister, kv.applyCh)
 
 	// You may need initialization code here.
+	kv.innerMap = make(map[string]string)
+	kv.clientValueMap = make(map[int32]string)
+	kv.clientErrMap = make(map[int32]Err)
+	kv.clientRequestIdMap = make(map[int32]int32)
+
+	go kv.ApplyLoop()
 
 	return kv
 }

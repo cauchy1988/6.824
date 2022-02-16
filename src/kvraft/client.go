@@ -2,12 +2,20 @@ package kvraft
 
 import "labrpc"
 import "crypto/rand"
-import "math/big"
+import (
+	"math/big"
+	"sync/atomic"
+)
 
+
+var clientIdx int32 = 0
 
 type Clerk struct {
 	servers []*labrpc.ClientEnd
 	// You will have to modify this struct.
+	clientId int32
+	requestId int32
+	leaderIdx int64
 }
 
 func nrand() int64 {
@@ -21,6 +29,9 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 	ck := new(Clerk)
 	ck.servers = servers
 	// You'll have to add code here.
+	ck.clientId = atomic.AddInt32(&clientIdx, 1)
+	ck.requestId = 1
+	ck.leaderIdx = 0
 	return ck
 }
 
@@ -39,7 +50,23 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 func (ck *Clerk) Get(key string) string {
 
 	// You will have to modify this function.
-	return ""
+	realLeader := ck.leaderIdx
+	getArgs := GetArgs{Key: key, ClientId: ck.clientId, RequestId: atomic.AddInt32(&ck.requestId, 1)}
+	getReply := GetReply{Err: ErrWrongLeader}
+	ck.servers[realLeader].Call("KVServer.Get", &getArgs, &getReply)
+	for ErrWrongLeader == getReply.Err {
+		realLeader = (realLeader + 1) % (int64)(len(ck.servers))
+		getReply = GetReply{Err: ErrWrongLeader}
+		ck.servers[realLeader].Call("KVServer.Get", &getArgs, &getReply)
+	}
+
+	ck.leaderIdx = realLeader
+
+	if ErrNoKey == getReply.Err {
+		return ""
+	}
+
+	return getReply.Value
 }
 
 //
@@ -54,6 +81,17 @@ func (ck *Clerk) Get(key string) string {
 //
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 	// You will have to modify this function.
+	realLeader := ck.leaderIdx
+	putAppendArgs := PutAppendArgs{Key: key, Value: value, Op: op, ClientId: ck.clientId, RequestId: atomic.AddInt32(&ck.requestId, 1)}
+	putAppendReply := PutAppendReply{Err: ErrWrongLeader}
+	ck.servers[realLeader].Call("KVServer.PutAppend", &putAppendArgs, &putAppendReply)
+	for ErrWrongLeader == putAppendReply.Err {
+		realLeader = (realLeader + 1) % (int64)(len(ck.servers))
+		putAppendReply = PutAppendReply{Err: ErrWrongLeader}
+		ck.servers[realLeader].Call("KVServer.PutAppend", &putAppendArgs, &putAppendReply)
+	}
+
+	ck.leaderIdx = realLeader
 }
 
 func (ck *Clerk) Put(key string, value string) {
