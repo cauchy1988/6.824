@@ -57,6 +57,10 @@ type LogEntry struct {
 	Command interface{}
 }
 
+type InitOp struct {
+	Fuck int
+}
+
 //
 // A Go object implementing a single Raft peer.
 //
@@ -157,7 +161,14 @@ func (rf *Raft) readPersist(data []byte) {
 	}
 }
 
+func(rf *Raft) InitCompleted() bool {
+	rf.mu.Lock()
+	defer rf.mu.Unlock()
 
+	lastAppliedLoad := atomic.LoadInt32(&rf.LastApplied)
+	isInitCompleted :=  lastAppliedLoad > 0 && rf.log[lastAppliedLoad - 1].Term >= rf.currentTerm
+	return isInitCompleted
+}
 
 
 //
@@ -456,7 +467,7 @@ func (rf *Raft)commitLoop() {
 		}
 		rf.mu.Unlock()
 
-		time.Sleep(8 * time.Millisecond)
+		time.Sleep(10 * time.Millisecond)
 	}
 }
 
@@ -535,7 +546,7 @@ func (rf *Raft)runLoop() {
 			}
 
 			// fmt.Println("runLoop-Append me leader end1:", rf.me)
-			time.Sleep(105 * time.Millisecond)
+			time.Sleep(50 * time.Millisecond)
 			// fmt.Println("runLoop-Append me leader end2:", rf.me)
 		} else {
 			// fmt.Println("runLoop-Append me:", rf.me)

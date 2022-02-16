@@ -48,7 +48,6 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 // arguments. and reply must be passed as a pointer.
 //
 func (ck *Clerk) Get(key string) string {
-
 	// You will have to modify this function.
 	realLeader := ck.leaderIdx
 	getArgs := GetArgs{Key: key, ClientId: ck.clientId, RequestId: atomic.AddInt32(&ck.requestId, 1)}

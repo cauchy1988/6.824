@@ -44,6 +44,7 @@ type KVServer struct {
 	// Your definitions here.
 	innerMap map[string]string
 
+	rwLock sync.RWMutex
 	clientErrMap       map[int32]Err
 	clientValueMap     map[int32]string
 	clientRequestIdMap map[int32]int32
@@ -54,8 +55,28 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	// Your code here.
 	// fmt.Println("Get Handler: args-", args)
 
+	tmp_term , leader := kv.rf.GetState()
+	if !leader {
+		reply.Err = ErrWrongLeader
+		return
+	}
+
+	if !kv.rf.InitCompleted() {
+		_, current_term, _ := kv.rf.Start(Op{OpType: "None"})
+		tmp_term, leader = kv.rf.GetState()
+		for leader && tmp_term == current_term && !kv.rf.InitCompleted() {
+			time.Sleep(10 * time.Millisecond)
+			tmp_term, leader = kv.rf.GetState()
+		}
+
+		if !leader || current_term != tmp_term {
+			reply.Err = ErrWrongLeader
+			return
+		}
+	}
+
 	{
-		kv.mu.Lock()
+		kv.rwLock.RLock()
 		_, ok := kv.clientErrMap[args.ClientId]
 		_, ok1 :=kv.clientRequestIdMap[args.ClientId]
 		if ok  && ok1 && kv.clientRequestIdMap[args.ClientId] == args.RequestId {
@@ -63,10 +84,10 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 			if reply.Err == OK {
 				reply.Value = kv.clientValueMap[args.ClientId]
 			}
-			kv.mu.Unlock()
+			kv.rwLock.RUnlock()
 			return
 		}
-		kv.mu.Unlock()
+		kv.rwLock.RUnlock()
 	}
 
 	tmpIndex, tmpTerm, tmpLeader := kv.rf.Start(Op{Key: args.Key, OpType: "Get", ClientIdx: args.ClientId, RequestIdx: args.RequestId})
@@ -89,34 +110,49 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 		return
 	}
 
-	term, isLeader = kv.rf.GetState()
-	if !isLeader || term != tmpTerm {
-		reply.Err = ErrWrongLeader
-		return
-	}
-
 	{
-		kv.mu.Lock()
+		kv.rwLock.RLock()
 		reply.Err = kv.clientErrMap[args.ClientId]
 		reply.Value = kv.clientValueMap[args.ClientId]
 		// fmt.Println("args-requestid:", args.RequestId, ", realRequestId:", kv.clientRequestIdMap[args.ClientId])
-		kv.mu.Unlock()
+		kv.rwLock.RUnlock()
 	}
 }
 
 func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	// Your code here.
 	// fmt.Println("Put Handler: args-", args)
+	tmp_term , leader := kv.rf.GetState()
+	if !leader {
+		reply.Err = ErrWrongLeader
+		return
+	}
+
+	if !kv.rf.InitCompleted() {
+		_, current_term, _ := kv.rf.Start(Op{OpType: "None"})
+		tmp_term, leader = kv.rf.GetState()
+		for leader && current_term == tmp_term && !kv.rf.InitCompleted() {
+			time.Sleep(10 * time.Millisecond)
+			tmp_term, leader = kv.rf.GetState()
+		}
+
+		if !leader || current_term != tmp_term {
+			reply.Err = ErrWrongLeader
+			return
+		}
+	}
+
+
 	{
-		kv.mu.Lock()
+		kv.rwLock.RLock()
 		_, ok := kv.clientErrMap[args.ClientId]
 		_, ok1 :=kv.clientRequestIdMap[args.ClientId]
 		if ok  && ok1 && kv.clientRequestIdMap[args.ClientId] == args.RequestId {
 			reply.Err = kv.clientErrMap[clientIdx]
-			kv.mu.Unlock()
+			kv.rwLock.RUnlock()
 			return
 		}
-		kv.mu.Unlock()
+		kv.rwLock.RUnlock()
 	}
 
 	tmpIndex, tmpTerm, tmpLeader := kv.rf.Start(Op{Key: args.Key, Value: args.Value, OpType: args.Op, ClientIdx: args.ClientId, RequestIdx: args.RequestId})
@@ -139,21 +175,15 @@ func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 		return
 	}
 
-	term, isLeader = kv.rf.GetState()
-	if !isLeader || term != tmpTerm {
-		reply.Err = ErrWrongLeader
-		return
-	}
-
 	reply.Err = OK
 }
 
 func (kv *KVServer) ApplyLoop() {
 	for !kv.killed() {
 		appMsg := <-kv.applyCh
-		op := appMsg.Command.(Op)
 		index := appMsg.CommandIndex
 
+		op := appMsg.Command.(Op)
 		if "Put" == op.OpType {
 			kv.innerMap[op.Key] = op.Value
 		} else if "Append" == op.OpType {
@@ -164,8 +194,8 @@ func (kv *KVServer) ApplyLoop() {
 			}
 		}
 
-		{
-			kv.mu.Lock()
+		if "None" != op.OpType {
+			kv.rwLock.Lock()
 			kv.clientErrMap[op.ClientIdx] = OK
 			kv.clientRequestIdMap[op.ClientIdx] = op.RequestIdx
 			if "Get" == op.OpType {
@@ -176,14 +206,12 @@ func (kv *KVServer) ApplyLoop() {
 					kv.clientValueMap[op.ClientIdx] = ""
 				}
 			}
-			kv.mu.Unlock()
+			kv.rwLock.Unlock()
 		}
 
 		if !atomic.CompareAndSwapInt32(&kv.rf.LastApplied, int32(index) - 1, int32(index)) {
 			panic("Fatal Error: lastApplied not apply in sequence!!!")
 		}
-
-		time.Sleep(10 * time.Millisecond)
 	}
 }
 
