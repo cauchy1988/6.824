@@ -46,29 +46,43 @@ type KVServer struct {
 	kvState raft.KvState
 }
 
+func (kv *KVServer) waitForInitCompleted() bool {
+	term , leader := kv.rf.GetState()
+	if !leader {
+		return false
+	}
+
+	kv.rwLock.RLock()
+	isInitCompleted := term <= kv.kvState.LastTerm
+	kv.rwLock.RUnlock()
+
+	if !isInitCompleted {
+		_, currentTerm, leader := kv.rf.Start(Op{OpType: "None"})
+		for leader && term == currentTerm && !isInitCompleted {
+			time.Sleep(10 * time.Millisecond)
+
+			kv.rwLock.RLock()
+			isInitCompleted = term <= kv.kvState.LastTerm
+			kv.rwLock.RUnlock()
+			currentTerm, leader = kv.rf.GetState()
+		}
+
+		if !leader || currentTerm != term {
+			return false
+		}
+	}
+
+	return true
+}
+
 
 func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 	// Your code here.
 	// fmt.Println("Get Handler: args-", args)
 
-	tmp_term , leader := kv.rf.GetState()
-	if !leader {
+	if !kv.waitForInitCompleted() {
 		reply.Err = ErrWrongLeader
 		return
-	}
-
-	if !kv.rf.InitCompleted() {
-		_, current_term, _ := kv.rf.Start(Op{OpType: "None"})
-		tmp_term, leader = kv.rf.GetState()
-		for leader && tmp_term == current_term && !kv.rf.InitCompleted() {
-			time.Sleep(10 * time.Millisecond)
-			tmp_term, leader = kv.rf.GetState()
-		}
-
-		if !leader || current_term != tmp_term {
-			reply.Err = ErrWrongLeader
-			return
-		}
 	}
 
 	{
@@ -118,26 +132,11 @@ func (kv *KVServer) Get(args *GetArgs, reply *GetReply) {
 func (kv *KVServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) {
 	// Your code here.
 	// fmt.Println("Put Handler: args-", args)
-	tmp_term , leader := kv.rf.GetState()
-	if !leader {
+
+	if !kv.waitForInitCompleted() {
 		reply.Err = ErrWrongLeader
 		return
 	}
-
-	if !kv.rf.InitCompleted() {
-		_, current_term, _ := kv.rf.Start(Op{OpType: "None"})
-		tmp_term, leader = kv.rf.GetState()
-		for leader && current_term == tmp_term && !kv.rf.InitCompleted() {
-			time.Sleep(10 * time.Millisecond)
-			tmp_term, leader = kv.rf.GetState()
-		}
-
-		if !leader || current_term != tmp_term {
-			reply.Err = ErrWrongLeader
-			return
-		}
-	}
-
 
 	{
 		kv.rwLock.RLock()
@@ -208,9 +207,11 @@ func (kv *KVServer) ApplyLoop() {
 			kv.kvState.LastIndex = appMsg.CommandIndex
 			kv.kvState.LastTerm = appMsg.CommandTerm
 
+			fmt.Println("exec channel cmd:", ", lastIndex:", kv.kvState.LastIndex, ", lastTerm:", kv.kvState.LastTerm, ", me:", kv.me)
 			if !atomic.CompareAndSwapInt32(&kv.rf.LastApplied, int32(index) - 1, int32(index)) {
 				panic("Fatal Error: lastApplied not apply in sequence!!!")
 			}
+
 		} else {
 			kv.kvState.InnerMap = appMsg.SnapshotState.InnerMap
 
@@ -220,6 +221,8 @@ func (kv *KVServer) ApplyLoop() {
 
 			kv.kvState.LastIndex = appMsg.SnapshotState.LastIndex
 			kv.kvState.LastTerm = appMsg.SnapshotState.LastTerm
+
+			fmt.Println("exec snapshot:", ", lastIndex:", kv.kvState.LastIndex, ", lastTerm:", kv.kvState.LastTerm, ", me:", kv.me)
 
 			atomic.StoreInt32(&kv.rf.LastApplied, int32(appMsg.SnapshotState.LastIndex))
 		}
@@ -235,9 +238,12 @@ func (kv *KVServer) SnapshotLoop() {
 			localKvState := kv.kvState
 			kv.rwLock.RUnlock()
 			kv.rf.SaveSnapshot(&localKvState)
+			fmt.Println("save snapshot:", ", lastIndex:", kv.kvState.LastIndex, ", lastTerm:", kv.kvState.LastTerm, ", me:", kv.me)
 		}
+		time.Sleep(20 * time.Millisecond)
 	}
 }
+
 
 //
 // the tester calls Kill() when a KVServer instance won't
@@ -293,13 +299,16 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 	kv.kvState.ClientValueMap = make(map[int32]string)
 	kv.kvState.ClientErrMap = make(map[int32]string)
 	kv.kvState.ClientRequestIdMap = make(map[int32]int32)
+	kv.kvState.LastIndex = 0
+	kv.kvState.LastTerm = 0
 
 	go kv.ApplyLoop()
 
 	if kv.maxraftstate > 0 {
 		go kv.SnapshotLoop()
-		fmt.Println("start snapshot")
 	}
+
+	fmt.Println("me:", kv.me, ", maxraftstate:", maxraftstate)
 
 	return kv
 }

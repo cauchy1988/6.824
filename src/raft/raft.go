@@ -27,7 +27,10 @@ import "sync/atomic"
 import "labrpc"
 
 import "math/rand"
-import "time"
+import (
+	"time"
+	"fmt"
+)
 
 
 // import "bytes"
@@ -80,6 +83,8 @@ type Raft struct {
 	currentTerm int
 	votedFor map[int] int
 	log []LogEntry
+	lastSnapshotIndex int
+	lastSnapShortTerm int
 	baseIdx int
 
 	// volatile states for all servers
@@ -135,6 +140,8 @@ func (rf *Raft) persist() {
 	e.Encode(rf.currentTerm)
 	e.Encode(rf.votedFor)
 	e.Encode(rf.log)
+	e.Encode(rf.lastSnapshotIndex)
+	e.Encode(rf.lastSnapShortTerm)
 	e.Encode(rf.baseIdx)
 	data := w.Bytes()
 	rf.persister.SaveRaftState(data)
@@ -170,19 +177,31 @@ func (rf *Raft) saveSnapshot(kvState *KvState) {
 	xx.Encode(kvState)
 	xxx := x.Bytes()
 
-
-	appliedLen := int(kvState.LastIndex) - rf.baseIdx
-	if appliedLen > len(rf.log) {
-		panic("applied_len > len(rf.log) !!!")
+	if kvState.LastIndex < rf.baseIdx + 1 {
+		return
 	}
+
+	if rf.baseIdx + len(rf.log) >= kvState.LastIndex && rf.log[kvState.LastIndex - rf.baseIdx - 1].Term == kvState.LastTerm {
+		rf.log = rf.log[kvState.LastIndex - rf.baseIdx:]
+	} else {
+		rf.log = []LogEntry{}
+	}
+
 	rf.baseIdx = kvState.LastIndex
-	rf.log = rf.log[appliedLen:]
+	rf.lastSnapshotIndex = kvState.LastIndex
+	rf.lastSnapShortTerm = kvState.LastTerm
+
+	if rf.commitIndex < rf.baseIdx {
+		rf.commitIndex = rf.baseIdx
+	}
 
 	w := new(bytes.Buffer)
 	e := labgob.NewEncoder(w)
 	e.Encode(rf.currentTerm)
 	e.Encode(rf.votedFor)
 	e.Encode(rf.log)
+	e.Encode(rf.lastSnapshotIndex)
+	e.Encode(rf.lastSnapShortTerm)
 	e.Encode(rf.baseIdx)
 	data := w.Bytes()
 	rf.persister.SaveStateAndSnapshot(data, xxx)
@@ -219,13 +238,17 @@ func (rf *Raft) readPersist(data []byte) {
 	var term int = 0
 	var vote_info map[int] int = map[int] int{}
 	var log []LogEntry = []LogEntry{}
+	var lastSnapshotTerm = 0
+	var lastSnapshotIndex = 0
 	var base_idx int = 0
-	if d.Decode(&term) != nil || d.Decode(&vote_info) != nil || d.Decode(&log) != nil || d.Decode(&base_idx) != nil{
+	if d.Decode(&term) != nil || d.Decode(&vote_info) != nil || d.Decode(&log) != nil || d.Decode(&lastSnapshotIndex) != nil || d.Decode(&lastSnapshotTerm) != nil  || d.Decode(&base_idx) != nil{
 		// fmt.Println("readPersist error.")
 	} else {
 		rf.currentTerm = term
 		rf.votedFor = vote_info
 		rf.log = log
+		rf.lastSnapshotIndex = lastSnapshotIndex
+		rf.lastSnapShortTerm = lastSnapshotTerm
 		rf.baseIdx = base_idx
 	}
 }
@@ -262,9 +285,26 @@ func(rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapshot
 		return
 	}
 
+	if rf.currentTerm != args.Term {
+		rf.currentTerm = args.Term
+	}
+
+	if rf.leaderIndex != args.LeaderId {
+		rf.leaderIndex = args.LeaderId
+	}
+
+	if nil == args.Data {
+		panic("nil == args.Data")
+		return
+	}
+
+	rf.bCalled = true
+
 	kvState := rf.readSnapshot(args.Data)
 	currentLastApplied := int(atomic.LoadInt32(&rf.LastApplied))
 	if currentLastApplied >= kvState.LastIndex {
+		reply.Executed = true
+		reply.ExecutedIndex = kvState.LastIndex
 		return
 	}
 
@@ -279,24 +319,13 @@ func(rf *Raft) InstallSnapshot(args *InstallSnapshotArgs, reply *InstallSnapshot
 	reply.Executed = true
 	reply.ExecutedIndex = kvState.LastIndex
 
-	if rf.baseIdx + len(rf.log) >= kvState.LastIndex && rf.log[kvState.LastIndex - rf.baseIdx - 1].Term == kvState.LastTerm {
-		rf.log = rf.log[kvState.LastIndex - rf.baseIdx:]
-	} else {
-		rf.log = []LogEntry{}
-	}
-	rf.baseIdx = kvState.LastIndex
-	if rf.commitIndex < rf.baseIdx {
-		rf.commitIndex = rf.baseIdx
-	}
+	rf.saveSnapshot(&kvState)
 
 	applyMsg := ApplyMsg{
 		CommandValid: false,
 		SnapshotState: kvState,
 	}
 	rf.applyCh <- applyMsg
-
-
-	rf.saveSnapshot(&kvState)
 }
 
 //
@@ -352,7 +381,12 @@ func (rf *Raft) RequestVote(args *RequestVoteArgs, reply *RequestVoteReply) {
 		}
 
 		log_len := len(rf.log) + rf.baseIdx
-		if _, ok := rf.votedFor[args.Term]; (!ok || rf.votedFor[args.Term] == args.CandidateId) && (log_len == rf.baseIdx || (args.LastLogTerm > rf.log[log_len - 1 - rf.baseIdx].Term) || (args.LastLogTerm == rf.log[log_len - 1 - rf.baseIdx].Term && args.LastLogIndex >= log_len)) {
+		if _, ok := rf.votedFor[args.Term];
+			(!ok || rf.votedFor[args.Term] == args.CandidateId) &&
+				(log_len == rf.baseIdx && (rf.baseIdx == 0 || args.LastLogTerm > rf.lastSnapShortTerm || args.LastLogTerm == rf.lastSnapShortTerm && args.LastLogIndex >= log_len) || (log_len > rf.baseIdx && ((args.LastLogTerm > rf.log[log_len - 1 - rf.baseIdx].Term) ||
+					(args.LastLogTerm == rf.log[log_len - 1 - rf.baseIdx].Term &&
+						args.LastLogIndex >= log_len)))) {
+
 			rf.votedFor[args.Term] = args.CandidateId
 			if !ok {
 				changed = true
@@ -429,12 +463,25 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 				changed = true
 				break
 			} else {
+				if 	args.PrevLogIndex + i - rf.baseIdx < 0 {
+					continue
+				}
+
 				if rf.log[args.PrevLogIndex + i - rf.baseIdx].Term != args.Entries[i].Term {
 					rf.log = rf.log[:args.PrevLogIndex + i - rf.baseIdx]
 					changed = true
 					i--
 				}
 			}
+		}
+
+		if rf.commitIndex < rf.lastSnapshotIndex {
+			snapshotBytes := rf.persister.ReadSnapshot()
+			if nil != snapshotBytes {
+				kvState := rf.readSnapshot(snapshotBytes)
+				rf.applyCh <- ApplyMsg{CommandValid:false, SnapshotState: kvState}
+			}
+			rf.commitIndex = rf.lastSnapshotIndex
 		}
 
 		if args.LeaderCommit > rf.commitIndex {
@@ -567,8 +614,21 @@ func (rf *Raft)commitLoop() {
 				rf.commitIndex = int(atomic.LoadInt32(&rf.LastApplied))
 			}
 
+			if rf.commitIndex < rf.lastSnapshotIndex {
+				snapshotBytes := rf.persister.ReadSnapshot()
+				if nil != snapshotBytes {
+					kvState := rf.readSnapshot(snapshotBytes)
+					rf.applyCh <- ApplyMsg{CommandValid:false, SnapshotState: kvState}
+				}
+				rf.commitIndex = rf.lastSnapshotIndex
+			}
+
 			try_idx := rf.commitIndex + 1
 			for {
+				if try_idx - 1 - rf.baseIdx < 0 {
+					fmt.Println("try_idx:", try_idx, ", baseIdx:", rf.baseIdx)
+				}
+
 				if try_idx > len(rf.log) + rf.baseIdx || rf.log[try_idx - 1 - rf.baseIdx].Term == rf.currentTerm {
 					break
 				}
@@ -624,13 +684,14 @@ func (rf *Raft)runLoop() {
 
 						// 某些落后太多的副本需要直接传snapshot过去
 						prevIdx := rf.nextIndex[idx] - 1
-						if prevIdx > 0 && prevIdx < rf.baseIdx + 1 {
+						if prevIdx == 0 && rf.baseIdx > 0 || prevIdx > 0 && prevIdx < rf.baseIdx {
 							installSnapshotargs := &InstallSnapshotArgs{
 								Term: rf.currentTerm,
 								LeaderId: rf.me,
 								Data: rf.persister.ReadSnapshot(),
 							}
 							rf.mu.Unlock()
+
 
 							installSnapshotReply := &InstallSnapshotReply{}
 							ret := rf.sendInstallSnapshot(idx, installSnapshotargs, installSnapshotReply)
@@ -639,6 +700,8 @@ func (rf *Raft)runLoop() {
 								installSnapshotReply.Executed = false
 								installSnapshotReply.Term = 0
 							}
+
+							//fmt.Println("send snapshot, me:", rf.me, ", to:", idx, ", ret:", ret, ", executed:", installSnapshotReply.Executed, ", term:", installSnapshotReply.Term, ", executed idx:", installSnapshotReply.ExecutedIndex, ", baseIdx:", rf.baseIdx)
 
 							rf.mu.Lock()
 							if installSnapshotReply.Term > rf.currentTerm {
@@ -665,6 +728,8 @@ func (rf *Raft)runLoop() {
 						}
 						if append_args.PrevLogIndex - rf.baseIdx > 0 {
 							append_args.PrevLogTerm = rf.log[append_args.PrevLogIndex - 1 - rf.baseIdx].Term
+						} else if rf.baseIdx > 0{
+							append_args.PrevLogTerm = rf.lastSnapShortTerm
 						}
 						append_args.Entries = rf.log[append_args.PrevLogIndex - rf.baseIdx:]
 
@@ -752,6 +817,8 @@ func (rf *Raft)runLoop() {
 			log_term := 0
 			if log_idx - rf.baseIdx > 0 {
 				log_term = rf.log[log_idx - 1 - rf.baseIdx].Term
+			} else if rf.baseIdx > 0 {
+				log_term = rf.lastSnapShortTerm
 			}
 
 			rf.mu.Unlock()
@@ -803,6 +870,7 @@ func (rf *Raft)runLoop() {
 										}
 									}
 									rf.leaderIndex = rf.me
+									fmt.Println("me:", rf.me, ", to be leader.")
 								}
 								rf.mu.Unlock()
 							}
@@ -850,6 +918,8 @@ func Make(peers []*labrpc.ClientEnd, me int,
 	rf.currentTerm = 0
 	rf.votedFor = make(map[int] int)
 	rf.log = []LogEntry{}
+	rf.lastSnapshotIndex = 0
+	rf.lastSnapShortTerm = 0
 	rf.baseIdx = 0
 
 	// volatile states for all servers
@@ -865,15 +935,6 @@ func Make(peers []*labrpc.ClientEnd, me int,
 
 	// initialize from state persisted before a crash
 	rf.readPersist(persister.ReadRaftState())
-
-	snapshotBytes := rf.persister.ReadSnapshot()
-	if nil != snapshotBytes {
-		kvState := rf.readSnapshot(snapshotBytes)
-		applyCh <- ApplyMsg{CommandValid:false, SnapshotState: KvState{}}
-		for int(atomic.LoadInt32(&rf.LastApplied)) < kvState.LastIndex {
-			time.Sleep(60 * time.Millisecond)
-		}
-	}
 
 	go rf.runLoop()
 	go rf.commitLoop()
