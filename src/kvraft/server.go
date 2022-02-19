@@ -8,7 +8,6 @@ import (
 	"sync"
 	"sync/atomic"
 	"time"
-	"fmt"
 )
 
 const Debug = 0
@@ -207,7 +206,7 @@ func (kv *KVServer) ApplyLoop() {
 			kv.kvState.LastIndex = appMsg.CommandIndex
 			kv.kvState.LastTerm = appMsg.CommandTerm
 
-			fmt.Println("exec channel cmd:", ", lastIndex:", kv.kvState.LastIndex, ", lastTerm:", kv.kvState.LastTerm, ", me:", kv.me)
+			// fmt.Println("exec channel cmd:", ", lastIndex:", kv.kvState.LastIndex, ", lastTerm:", kv.kvState.LastTerm, ", me:", kv.me)
 			if !atomic.CompareAndSwapInt32(&kv.rf.LastApplied, int32(index) - 1, int32(index)) {
 				panic("Fatal Error: lastApplied not apply in sequence!!!")
 			}
@@ -222,7 +221,7 @@ func (kv *KVServer) ApplyLoop() {
 			kv.kvState.LastIndex = appMsg.SnapshotState.LastIndex
 			kv.kvState.LastTerm = appMsg.SnapshotState.LastTerm
 
-			fmt.Println("exec snapshot:", ", lastIndex:", kv.kvState.LastIndex, ", lastTerm:", kv.kvState.LastTerm, ", me:", kv.me)
+			// fmt.Println("exec snapshot:", ", lastIndex:", kv.kvState.LastIndex, ", lastTerm:", kv.kvState.LastTerm, ", me:", kv.me)
 
 			atomic.StoreInt32(&kv.rf.LastApplied, int32(appMsg.SnapshotState.LastIndex))
 		}
@@ -238,7 +237,7 @@ func (kv *KVServer) SnapshotLoop() {
 			localKvState := kv.kvState
 			kv.rwLock.RUnlock()
 			kv.rf.SaveSnapshot(&localKvState)
-			fmt.Println("save snapshot:", ", lastIndex:", kv.kvState.LastIndex, ", lastTerm:", kv.kvState.LastTerm, ", me:", kv.me)
+			// fmt.Println("save snapshot:", ", lastIndex:", kv.kvState.LastIndex, ", lastTerm:", kv.kvState.LastTerm, ", me:", kv.me)
 		}
 		time.Sleep(20 * time.Millisecond)
 	}
@@ -308,7 +307,7 @@ func StartKVServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persiste
 		go kv.SnapshotLoop()
 	}
 
-	fmt.Println("me:", kv.me, ", maxraftstate:", maxraftstate)
+	// fmt.Println("me:", kv.me, ", maxraftstate:", maxraftstate)
 
 	return kv
 }

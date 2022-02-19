@@ -29,7 +29,6 @@ import "labrpc"
 import "math/rand"
 import (
 	"time"
-	"fmt"
 )
 
 
@@ -625,10 +624,6 @@ func (rf *Raft)commitLoop() {
 
 			try_idx := rf.commitIndex + 1
 			for {
-				if try_idx - 1 - rf.baseIdx < 0 {
-					fmt.Println("try_idx:", try_idx, ", baseIdx:", rf.baseIdx)
-				}
-
 				if try_idx > len(rf.log) + rf.baseIdx || rf.log[try_idx - 1 - rf.baseIdx].Term == rf.currentTerm {
 					break
 				}
@@ -870,7 +865,7 @@ func (rf *Raft)runLoop() {
 										}
 									}
 									rf.leaderIndex = rf.me
-									fmt.Println("me:", rf.me, ", to be leader.")
+									// fmt.Println("me:", rf.me, ", to be leader.")
 								}
 								rf.mu.Unlock()
 							}
