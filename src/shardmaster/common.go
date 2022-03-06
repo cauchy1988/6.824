@@ -35,8 +35,8 @@ const (
 type Err string
 
 type ClientIdxInfo struct {
-	clientId int32
-	requestId int32
+	ClientId  int32
+	RequestId int32
 }
 
 type JoinArgs struct {

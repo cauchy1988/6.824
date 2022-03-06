@@ -458,8 +458,17 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 
 		for i := 0; i < len(args.Entries); i++ {
 			if args.PrevLogIndex + i >= len(rf.log) + rf.baseIdx {
+				// local_idx := len(rf.log)
+
 				rf.log = append(rf.log, args.Entries[i:]...)
 				changed = true
+
+				/*
+				for j := i; j < len(args.Entries); j++ {
+					fmt.Println("copied me:", rf.me, ", command:", args.Entries[j].Command, ", commandindex:", local_idx + j - i + 1)
+				}
+				*/
+
 				break
 			} else {
 				if 	args.PrevLogIndex + i - rf.baseIdx < 0 {
@@ -496,6 +505,7 @@ func (rf *Raft) AppendEntries(args *AppendEntriesArgs, reply *AppendEntriesReply
 			}
 			for j := orig_commit_idx + 1; j <= rf.commitIndex; j++ {
 				apply_msg.Command = rf.log[j - 1 - rf.baseIdx].Command
+				// fmt.Println("me:", rf.me, ", command:", apply_msg.Command, ", commandindex:", apply_msg.CommandIndex)
 				apply_msg.CommandIndex = j
 				apply_msg.CommandTerm = rf.log[j - 1 - rf.baseIdx].Term
 				rf.applyCh <- apply_msg

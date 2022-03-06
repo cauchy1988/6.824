@@ -40,10 +40,11 @@ func MakeClerk(servers []*labrpc.ClientEnd) *Clerk {
 
 func (ck *Clerk) Query(num int) Config {
 	args := &QueryArgs{}
+
 	// Your code here.
 	args.Num = num
-	args.ClientIdxInfo.clientId = ck.clientId
-	args.ClientIdxInfo.requestId = atomic.AddInt32(&ck.requestId, 1)
+	args.ClientIdxInfo.ClientId = ck.clientId
+	args.ClientIdxInfo.RequestId = atomic.AddInt32(&ck.requestId, 1)
 	for {
 		// try each known server.
 		for _, srv := range ck.servers {
@@ -61,8 +62,8 @@ func (ck *Clerk) Join(servers map[int][]string) {
 	args := &JoinArgs{}
 	// Your code here.
 	args.Servers = servers
-	args.ClientIdxInfo.clientId = ck.clientId
-	args.ClientIdxInfo.requestId = atomic.AddInt32(&ck.requestId, 1)
+	args.ClientIdxInfo.ClientId = ck.clientId
+	args.ClientIdxInfo.RequestId = atomic.AddInt32(&ck.requestId, 1)
 
 	for {
 		// try each known server.
@@ -81,8 +82,8 @@ func (ck *Clerk) Leave(gids []int) {
 	args := &LeaveArgs{}
 	// Your code here.
 	args.GIDs = gids
-	args.ClientIdxInfo.clientId = ck.clientId
-	args.ClientIdxInfo.requestId = atomic.AddInt32(&ck.requestId, 1)
+	args.ClientIdxInfo.ClientId = ck.clientId
+	args.ClientIdxInfo.RequestId = atomic.AddInt32(&ck.requestId, 1)
 
 	for {
 		// try each known server.
@@ -102,8 +103,8 @@ func (ck *Clerk) Move(shard int, gid int) {
 	// Your code here.
 	args.Shard = shard
 	args.GID = gid
-	args.ClientIdxInfo.clientId = ck.clientId
-	args.ClientIdxInfo.requestId = atomic.AddInt32(&ck.requestId, 1)
+	args.ClientIdxInfo.ClientId = ck.clientId
+	args.ClientIdxInfo.RequestId = atomic.AddInt32(&ck.requestId, 1)
 
 
 	for {

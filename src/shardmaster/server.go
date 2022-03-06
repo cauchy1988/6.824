@@ -50,7 +50,7 @@ func (sm *ShardMaster) waitForInitCompleted() bool {
 	sm.rwLock.RUnlock()
 
 	if !isInitCompleted {
-		_, currentTerm, leader := sm.rf.Start(Op{OpType: "NONE"})
+		_, currentTerm, leader := sm.rf.Start(Op{OpType: "NONE", Args: nil})
 		for leader && term == currentTerm && !isInitCompleted {
 			time.Sleep(10 * time.Millisecond)
 
@@ -70,17 +70,17 @@ func (sm *ShardMaster) waitForInitCompleted() bool {
 
 func (sm *ShardMaster) Join(args *JoinArgs, reply *JoinReply) {
 	// Your code here.
-	sm.configChange("JOIN", args.ClientIdxInfo,  args, &reply.WrongLeader, &reply.Err)
+	sm.configChange("JOIN", args.ClientIdxInfo,  *args, &reply.WrongLeader, &reply.Err)
 }
 
 func (sm *ShardMaster) Leave(args *LeaveArgs, reply *LeaveReply) {
 	// Your code here.
-	sm.configChange("LEAVE", args.ClientIdxInfo, args, &reply.WrongLeader, &reply.Err)
+	sm.configChange("LEAVE", args.ClientIdxInfo, *args, &reply.WrongLeader, &reply.Err)
 }
 
 func (sm *ShardMaster) Move(args *MoveArgs, reply *MoveReply) {
 	// Your code here.
-	sm.configChange("MOVE", args.ClientIdxInfo, args, &reply.WrongLeader, &reply.Err)
+	sm.configChange("MOVE", args.ClientIdxInfo, *args, &reply.WrongLeader, &reply.Err)
 }
 
 func (sm *ShardMaster) configChange(opType string, clientIdxInfo ClientIdxInfo,  args interface{}, wrongLeader *bool, err *Err) {
@@ -93,8 +93,8 @@ func (sm *ShardMaster) configChange(opType string, clientIdxInfo ClientIdxInfo, 
 
 	{
 		sm.rwLock.RLock()
-		clientValue, ok := sm.clientInfoMap[clientIdxInfo.clientId]
-		if ok && clientValue.RequestId == clientIdxInfo.requestId {
+		clientValue, ok := sm.clientInfoMap[clientIdxInfo.ClientId]
+		if ok && clientValue.RequestId == clientIdxInfo.RequestId {
 			*wrongLeader = clientValue.WrongLeader
 			*err = clientValue.Err
 			return
@@ -130,8 +130,8 @@ func (sm *ShardMaster) Query(args *QueryArgs, reply *QueryReply) {
 
 	{
 		sm.rwLock.RLock()
-		clientValue, ok := sm.clientInfoMap[args.ClientIdxInfo.clientId]
-		if ok && clientValue.RequestId == args.ClientIdxInfo.requestId {
+		clientValue, ok := sm.clientInfoMap[args.ClientIdxInfo.ClientId]
+		if ok && clientValue.RequestId == args.ClientIdxInfo.RequestId {
 			reply.WrongLeader = clientValue.WrongLeader
 			reply.Err = clientValue.Err
 			reply.Config = clientValue.Config
@@ -140,7 +140,7 @@ func (sm *ShardMaster) Query(args *QueryArgs, reply *QueryReply) {
 		sm.rwLock.RUnlock()
 	}
 
-	tmpIndex, tmpTerm, tmpLeader := sm.rf.Start(Op{OpType : "QUERY", Args : args})
+	tmpIndex, tmpTerm, tmpLeader := sm.rf.Start(Op{OpType : "QUERY", Args : *args})
 	if !tmpLeader {
 		reply.WrongLeader = true
 		return
@@ -158,9 +158,9 @@ func (sm *ShardMaster) Query(args *QueryArgs, reply *QueryReply) {
 
 	{
 		sm.rwLock.RLock()
-		reply.Err = sm.clientInfoMap[args.ClientIdxInfo.clientId].Err
-		reply.WrongLeader = sm.clientInfoMap[args.ClientIdxInfo.clientId].WrongLeader
-		reply.Config = sm.clientInfoMap[args.ClientIdxInfo.clientId].Config
+		reply.Err = sm.clientInfoMap[args.ClientIdxInfo.ClientId].Err
+		reply.WrongLeader = sm.clientInfoMap[args.ClientIdxInfo.ClientId].WrongLeader
+		reply.Config = sm.clientInfoMap[args.ClientIdxInfo.ClientId].Config
 		sm.rwLock.RUnlock()
 	}
 }
@@ -268,8 +268,11 @@ func (sm *ShardMaster) applyLoop() {
 
 		sm.rwLock.Lock()
 
+		// fmt.Println("one appMsg:", appMsg, ", me:",  sm.me)
+
 		index := appMsg.CommandIndex
 		op := appMsg.Command.(Op)
+
 		var clientIdxInfo *ClientIdxInfo = nil
 		var realIdx = -1
 
@@ -327,13 +330,13 @@ func (sm *ShardMaster) applyLoop() {
 		}
 
 		if "NONE" != op.OpType {
-			value, ok := sm.clientInfoMap[clientIdxInfo.clientId]
+			value, ok := sm.clientInfoMap[clientIdxInfo.ClientId]
 			if !ok {
 				value = ClientCachedInfo{}
 			}
 
 			value.WrongLeader = false
-			value.RequestId = clientIdxInfo.requestId
+			value.RequestId = clientIdxInfo.RequestId
 			value.Err = OK
 
 			if "QUERY" == op.OpType {
@@ -343,8 +346,10 @@ func (sm *ShardMaster) applyLoop() {
 				value.Config = sm.configs[realIdx]
 			}
 
-			sm.clientInfoMap[clientIdxInfo.clientId] = value
+			sm.clientInfoMap[clientIdxInfo.ClientId] = value
 		}
+
+		sm.lastTerm = appMsg.CommandTerm
 
 		if !atomic.CompareAndSwapInt32(&sm.rf.LastApplied, int32(index) - 1, int32(index)) {
 			panic("Fatal Error: lastApplied not apply in sequence!!!")
@@ -390,6 +395,10 @@ func StartServer(servers []*labrpc.ClientEnd, me int, persister *raft.Persister)
 	sm.configs[0].Groups = map[int][]string{}
 
 	labgob.Register(Op{})
+	labgob.Register(QueryArgs{})
+	labgob.Register(JoinArgs{})
+	labgob.Register(LeaveArgs{})
+	labgob.Register(MoveArgs{})
 	sm.applyCh = make(chan raft.ApplyMsg)
 	sm.rf = raft.Make(servers, me, persister, sm.applyCh)
 
