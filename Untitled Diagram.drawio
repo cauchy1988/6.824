@@ -1,6 +1,6 @@
-<mxfile host="app.diagrams.net" modified="2022-04-01T17:18:38.845Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36" etag="5fwPHmMVvfNwR-jDGudJ" version="17.1.5" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-01T17:29:51.899Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/99.0.4844.84 Safari/537.36" etag="ADn3Mweg4g-eneaH_cS1" version="17.1.5" type="github">
   <diagram name="Page-1" id="edf60f1a-56cd-e834-aa8a-f176f3a09ee4">
-    <mxGraphModel dx="1186" dy="764" grid="1" gridSize="13" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="3300" pageHeight="2339" background="none" math="0" shadow="0">
+    <mxGraphModel dx="1186" dy="764" grid="1" gridSize="13" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="583" background="none" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
@@ -42,9 +42,6 @@
         </mxCell>
         <mxCell id="inHCAh-rtTuk2Lil4JLo-24" value="!migration_map.empty()" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="923" y="1625" width="182" height="65" as="geometry" />
-        </mxCell>
-        <mxCell id="inHCAh-rtTuk2Lil4JLo-25" value="&lt;span style=&quot;text-align: left&quot;&gt;执行 migration_map :&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: left&quot;&gt;map(gpid, configuration_balancer_request)&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="832" y="1742" width="364" height="39" as="geometry" />
         </mxCell>
         <mxCell id="inHCAh-rtTuk2Lil4JLo-26" value="&lt;span style=&quot;text-align: left&quot;&gt;打印 migration_map :&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: left&quot;&gt;map(gpid, configuration_balancer_request)&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
           <mxGeometry x="382.88" y="1742" width="416" height="39" as="geometry" />
@@ -173,7 +170,7 @@
           <mxGeometry x="730.5" y="1306.5" width="139" height="39" as="geometry" />
         </mxCell>
         <mxCell id="inHCAh-rtTuk2Lil4JLo-63" value="分片healthy" style="ellipse;whiteSpace=wrap;html=1;" vertex="1" parent="1">
-          <mxGeometry x="727" y="1044.5" width="146" height="52" as="geometry" />
+          <mxGeometry x="727" y="1066" width="146" height="52" as="geometry" />
         </mxCell>
         <mxCell id="inHCAh-rtTuk2Lil4JLo-64" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="inHCAh-rtTuk2Lil4JLo-63" target="inHCAh-rtTuk2Lil4JLo-62">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
@@ -248,7 +245,7 @@
         <mxCell id="inHCAh-rtTuk2Lil4JLo-84" value="CT_ADD_SECONDARY 的action塞入 config_context.lb_action" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
           <mxGeometry x="506.38" y="728" width="182" height="39" as="geometry" />
         </mxCell>
-        <mxCell id="inHCAh-rtTuk2Lil4JLo-85" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+        <mxCell id="inHCAh-rtTuk2Lil4JLo-85" value="CT_REMOVE类型的action塞入config_context.lb_action&lt;br&gt;&amp;nbsp;" style="rounded=0;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
           <mxGeometry x="506.38" y="851.5" width="182" height="39" as="geometry" />
         </mxCell>
         <mxCell id="inHCAh-rtTuk2Lil4JLo-87" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="inHCAh-rtTuk2Lil4JLo-20" target="inHCAh-rtTuk2Lil4JLo-22">
@@ -272,7 +269,7 @@
             <mxPoint x="232" y="1651" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="inHCAh-rtTuk2Lil4JLo-92" value="&lt;span&gt;计算(分析)balance实际需要执行的操作&lt;/span&gt;&lt;br&gt;&lt;span&gt;输出: migration_map :&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span&gt;map(gpid, configuration_balancer_request)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;" vertex="1" parent="1">
+        <mxCell id="inHCAh-rtTuk2Lil4JLo-92" value="&lt;span&gt;计算(分析)balance实际需要执行的操作&lt;/span&gt;&lt;br&gt;&lt;span&gt;输出: migration_map :&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span&gt;map(gpid, configuration_balancer_request)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;align=left;fillColor=#66FF66;" vertex="1" parent="1">
           <mxGeometry x="910" y="1526.5" width="232" height="52" as="geometry" />
         </mxCell>
         <mxCell id="inHCAh-rtTuk2Lil4JLo-93" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="inHCAh-rtTuk2Lil4JLo-18" target="inHCAh-rtTuk2Lil4JLo-19">
@@ -308,16 +305,16 @@
             <mxPoint x="1103" y="1599" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="inHCAh-rtTuk2Lil4JLo-102" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="inHCAh-rtTuk2Lil4JLo-25" target="inHCAh-rtTuk2Lil4JLo-27">
+        <mxCell id="inHCAh-rtTuk2Lil4JLo-102" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" target="inHCAh-rtTuk2Lil4JLo-27">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
-            <mxPoint x="1196" y="1753" as="sourcePoint" />
+            <mxPoint x="1014" y="1781" as="sourcePoint" />
             <mxPoint x="1246" y="1703" as="targetPoint" />
           </mxGeometry>
         </mxCell>
-        <mxCell id="inHCAh-rtTuk2Lil4JLo-103" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="inHCAh-rtTuk2Lil4JLo-24" target="inHCAh-rtTuk2Lil4JLo-25">
+        <mxCell id="inHCAh-rtTuk2Lil4JLo-103" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="inHCAh-rtTuk2Lil4JLo-24">
           <mxGeometry relative="1" as="geometry">
             <mxPoint x="1144" y="1677" as="sourcePoint" />
-            <mxPoint x="1244" y="1677" as="targetPoint" />
+            <mxPoint x="1014" y="1742" as="targetPoint" />
           </mxGeometry>
         </mxCell>
         <mxCell id="inHCAh-rtTuk2Lil4JLo-104" value="Yes" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="inHCAh-rtTuk2Lil4JLo-103">
@@ -373,6 +370,12 @@
             <mxPoint x="429" y="843" as="sourcePoint" />
             <mxPoint x="273" y="871" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="inHCAh-rtTuk2Lil4JLo-118" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="inHCAh-rtTuk2Lil4JLo-117" target="inHCAh-rtTuk2Lil4JLo-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="inHCAh-rtTuk2Lil4JLo-117" value="&lt;span style=&quot;text-align: left&quot;&gt;执行 migration_map :&amp;nbsp;&amp;nbsp;&lt;/span&gt;&lt;span style=&quot;text-align: left&quot;&gt;map(gpid, configuration_balancer_request)&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#66FF66;" vertex="1" parent="1">
+          <mxGeometry x="877.5" y="1742" width="273" height="52" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
