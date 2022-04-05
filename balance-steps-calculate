@@ -1,1 +1,174 @@
-<mxfile host="app.diagrams.net" modified="2022-04-05T11:33:56.104Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36" version="17.4.0" etag="a-9PWVRHurbAENH-agx_" type="github"><diagram id="fK1VG-0BANbjxJQrqyV_">UzV2zq1wL0osyPDNT0nNUTV2VTV2LsrPL4GwciucU3NyVI0MMlNUjV1UjYwMgFjVyA2HrCFY1qAgsSg1rwSLBiADYTaQg2Y1AA==</diagram></mxfile>
+<mxfile host="app.diagrams.net" modified="2022-04-05T14:34:11.990Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36" etag="UbSsY6WQS77xsg84Y5im" version="17.4.0" type="github">
+  <diagram id="fK1VG-0BANbjxJQrqyV_" name="Page-1">
+    <mxGraphModel dx="1186" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="NQNZJuW2xek8h-gsStvv-2" value="开始balance分析" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="82" y="70" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-3" value="primary-balance分析" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#33FF33;" vertex="1" parent="1">
+          <mxGeometry x="82" y="170" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-4" value="secondary-balance分析" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#33FF33;" vertex="1" parent="1">
+          <mxGeometry x="330" y="300" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-5" value="migration_map非空 || 配置项只允许primary-balance操作" style="rhombus;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="59.5" y="265" width="220" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-6" value="结束" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="90.5" y="440" width="158" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-7" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-2" target="NQNZJuW2xek8h-gsStvv-3">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="410" y="170" as="sourcePoint" />
+            <mxPoint x="460" y="120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-9" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-3" target="NQNZJuW2xek8h-gsStvv-5">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="230" as="sourcePoint" />
+            <mxPoint x="480" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-12" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-5" target="NQNZJuW2xek8h-gsStvv-6">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="290" y="430" as="sourcePoint" />
+            <mxPoint x="390" y="430" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-13" value="Yes" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;" connectable="0" vertex="1" parent="NQNZJuW2xek8h-gsStvv-12">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-5" target="NQNZJuW2xek8h-gsStvv-4">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="410" as="sourcePoint" />
+            <mxPoint x="330" y="360" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-15" value="No" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="NQNZJuW2xek8h-gsStvv-14">
+          <mxGeometry x="-0.5603" relative="1" as="geometry">
+            <mxPoint x="1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-18" value="开始处理某个app" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="650" y="110" width="175" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-19" value="配置忽略的app || unavailabe的app ||&lt;br&gt;正在splitting的app" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="668.25" y="205" width="138.5" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-20" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" target="NQNZJuW2xek8h-gsStvv-18">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="737.5" y="60" as="sourcePoint" />
+            <mxPoint x="630" y="200" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-21" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-18" target="NQNZJuW2xek8h-gsStvv-19">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="880" y="220" as="sourcePoint" />
+            <mxPoint x="930" y="170" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-22" value="" style="endArrow=classic;html=1;rounded=0;exitX=0;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-19">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="750" y="410" as="sourcePoint" />
+            <mxPoint x="738" y="80" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="600" y="265" />
+              <mxPoint x="600" y="80" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-23" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="NQNZJuW2xek8h-gsStvv-22">
+          <mxGeometry x="-0.6742" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-25" value="构造网络流图" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#66FF66;" vertex="1" parent="1">
+          <mxGeometry x="676.5" y="375" width="122" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-27" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-19" target="NQNZJuW2xek8h-gsStvv-25">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="900" y="320" as="sourcePoint" />
+            <mxPoint x="1000" y="320" as="targetPoint" />
+            <Array as="points" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-28" value="No" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fillColor=#FFFFFF;" connectable="0" vertex="1" parent="NQNZJuW2xek8h-gsStvv-27">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-29" value="尝试找网络流图的增广路径" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#66FF66;align=left;" vertex="1" parent="1">
+          <mxGeometry x="675.5" y="450" width="123" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-30" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-25" target="NQNZJuW2xek8h-gsStvv-29">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="840" y="510" as="sourcePoint" />
+            <mxPoint x="890" y="460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-31" value="能找到一条增广路径path" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="659.38" y="530" width="155.25" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-32" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-29" target="NQNZJuW2xek8h-gsStvv-31">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="540" as="sourcePoint" />
+            <mxPoint x="550" y="490" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-33" value="开始从路径path的末尾开始依次处理相邻的两个节点，同时记这条增广路径的流量为flow" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="665.5" y="640" width="144.5" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-34" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-31" target="NQNZJuW2xek8h-gsStvv-33">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="530" y="610" as="sourcePoint" />
+            <mxPoint x="580" y="560" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-37" value="Yes" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];" vertex="1" connectable="0" parent="NQNZJuW2xek8h-gsStvv-34">
+          <mxGeometry x="0.025" y="2" relative="1" as="geometry">
+            <mxPoint y="-1" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-35" value="处理相邻的两个节点(from, to)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="666" y="730" width="144" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-36" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-33" target="NQNZJuW2xek8h-gsStvv-35">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="520" y="800" as="sourcePoint" />
+            <mxPoint x="570" y="750" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-38" value="拿到from, to 两个节点关于正在处理的app的各个盘符的disk_load: from_disk_load, to_disk_load" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="640" y="810" width="194" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-39" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-35" target="NQNZJuW2xek8h-gsStvv-38">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="440" y="810" as="sourcePoint" />
+            <mxPoint x="490" y="760" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-40" value="将正在处理的app中主分片在from，有一个从分片在to上的所有分片的gpid收集成一个候选集：potential_moving" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="637" y="920" width="200" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-41" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-38" target="NQNZJuW2xek8h-gsStvv-40">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="470" y="920" as="sourcePoint" />
+            <mxPoint x="520" y="870" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-43" value="&lt;span&gt;开始遍历每个app&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="678.5" y="10" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-44" value="开始进行构造flow个MOVE_PRIMARY的configuration_balancer_request" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="635" y="1030" width="204" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-45" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-40" target="NQNZJuW2xek8h-gsStvv-44">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="430" y="1170" as="sourcePoint" />
+            <mxPoint x="480" y="1120" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
