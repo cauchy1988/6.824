@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-04-05T14:34:11.990Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36" etag="UbSsY6WQS77xsg84Y5im" version="17.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-06T02:56:13.736Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36" etag="fA5ozeSqBTeCfEZKqeq-" version="17.4.0" type="github">
   <diagram id="fK1VG-0BANbjxJQrqyV_" name="Page-1">
     <mxGraphModel dx="1186" dy="764" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" math="0" shadow="0">
       <root>
@@ -167,6 +167,101 @@
             <mxPoint x="430" y="1170" as="sourcePoint" />
             <mxPoint x="480" y="1120" as="targetPoint" />
           </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-47" value="开始构造第i个&lt;span style=&quot;text-align: left&quot;&gt;MOVE_PRIMARY的configuration_balancer_request&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="636" y="1140" width="203" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-48" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-44" target="NQNZJuW2xek8h-gsStvv-47">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="500" y="1140" as="sourcePoint" />
+            <mxPoint x="550" y="1090" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-49" value="从potential_moving中选择from_disk_load[gpid在from节点的盘符] - to_disk_load[gpid在to节点的盘符] 最大的gpid" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="608.5" y="1220" width="260" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-50" value="由gpid、from、to等构造一个&lt;span&gt;configuration_balancer_request(MOVE_PRIMARY)&lt;br&gt;并塞入migration_map&lt;br&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="597.5" y="1330" width="285" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-51" value="--from_disk_load[gpid所在from节点的盘符]&lt;br&gt;++to_disk_load[gpid所在to节点的盘符]&lt;br&gt;potential_moving.erase(gpid)" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="620" y="1430" width="240" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-52" value="&lt;span style=&quot;color: rgb(0 , 0 , 0) ; font-family: &amp;#34;helvetica&amp;#34; ; font-size: 12px ; font-style: normal ; font-weight: 400 ; letter-spacing: normal ; text-align: left ; text-indent: 0px ; text-transform: none ; word-spacing: 0px ; background-color: rgb(248 , 249 , 250) ; display: inline ; float: none&quot;&gt;flow个configuration_balancer_request构造完毕?&lt;/span&gt;" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="594.25" y="1540" width="291.5" height="70" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-53" value="" style="endArrow=classic;html=1;rounded=0;edgeStyle=orthogonalEdgeStyle;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-52">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="600" y="1580" as="sourcePoint" />
+            <mxPoint x="740" y="1120" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="590" y="1575" />
+              <mxPoint x="590" y="1120" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-54" value="No" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fillColor=#FFFFFF;" connectable="0" vertex="1" parent="NQNZJuW2xek8h-gsStvv-53">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-55" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-47" target="NQNZJuW2xek8h-gsStvv-49">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="980" y="1330" as="sourcePoint" />
+            <mxPoint x="1030" y="1280" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-56" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-49" target="NQNZJuW2xek8h-gsStvv-50">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="430" y="1510" as="sourcePoint" />
+            <mxPoint x="480" y="1460" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-57" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-50" target="NQNZJuW2xek8h-gsStvv-51">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="900" y="1400" as="sourcePoint" />
+            <mxPoint x="950" y="1350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-58" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-51" target="NQNZJuW2xek8h-gsStvv-52">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="900" y="1550" as="sourcePoint" />
+            <mxPoint x="950" y="1500" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-59" value="path路径遍历完毕?" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="610.5" y="1670" width="256" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-60" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-52" target="NQNZJuW2xek8h-gsStvv-59">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="500" y="1620" as="sourcePoint" />
+            <mxPoint x="600" y="1620" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-61" value="Yes" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fillColor=#FFFFFF;" connectable="0" vertex="1" parent="NQNZJuW2xek8h-gsStvv-60">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-62" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;edgeStyle=orthogonalEdgeStyle;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-59">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="870" y="1715" as="sourcePoint" />
+            <mxPoint x="740" y="710" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="910" y="1715" />
+              <mxPoint x="910" y="710" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-63" value="No" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fillColor=#FFFFFF;" connectable="0" vertex="1" parent="NQNZJuW2xek8h-gsStvv-62">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-64" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="NQNZJuW2xek8h-gsStvv-59" target="NQNZJuW2xek8h-gsStvv-66">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="780" y="1820" as="sourcePoint" />
+            <mxPoint x="740" y="1820" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-65" value="Label" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fillColor=#FFFFFF;" connectable="0" vertex="1" parent="NQNZJuW2xek8h-gsStvv-64">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="NQNZJuW2xek8h-gsStvv-66" value="balance_in_turn 开关开启&lt;br&gt;并且migration_map已有数据" style="rhombus;whiteSpace=wrap;html=1;fillColor=#FFFFFF;" vertex="1" parent="1">
+          <mxGeometry x="631.5" y="1810" width="214" height="80" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
