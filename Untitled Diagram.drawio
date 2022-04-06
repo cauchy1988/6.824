@@ -1,4 +1,4 @@
-<mxfile host="app.diagrams.net" modified="2022-04-06T08:39:24.066Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36" etag="LfiHSGuhubFjtMzTehRn" version="17.4.0" type="github">
+<mxfile host="app.diagrams.net" modified="2022-04-06T08:47:04.213Z" agent="5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/100.0.4896.60 Safari/537.36" etag="UTUYjqYTB4hxzwkCfUGn" version="17.4.0" type="github">
   <diagram name="Page-1" id="edf60f1a-56cd-e834-aa8a-f176f3a09ee4">
     <mxGraphModel dx="1186" dy="764" grid="1" gridSize="13" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="1920" background="none" math="0" shadow="0">
       <root>
@@ -905,7 +905,7 @@
           </mxGeometry>
         </mxCell>
         <mxCell id="0hxDmn6Wgr_d0VM1-wjn-114" value="ordered_address_ids.back() 指代的节点上的分片作为候选集 : partitions" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
-          <mxGeometry x="1723.81" y="2860" width="210" height="71" as="geometry" />
+          <mxGeometry x="1725.19" y="2839" width="210" height="71" as="geometry" />
         </mxCell>
         <mxCell id="0hxDmn6Wgr_d0VM1-wjn-115" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="0hxDmn6Wgr_d0VM1-wjn-110" target="0hxDmn6Wgr_d0VM1-wjn-114">
           <mxGeometry relative="1" as="geometry">
@@ -916,8 +916,8 @@
         <mxCell id="0hxDmn6Wgr_d0VM1-wjn-116" value="No" style="edgeLabel;resizable=0;html=1;align=center;verticalAlign=middle;fillColor=#FFFFFF;" connectable="0" vertex="1" parent="0hxDmn6Wgr_d0VM1-wjn-115">
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
-        <mxCell id="0hxDmn6Wgr_d0VM1-wjn-117" value="从partitions中选择对应盘符的disk_load值(node_loads[gpid对应的盘符])最大的那一个gpid&lt;br&gt;这里需要跳过&lt;span style=&quot;text-align: center&quot;&gt;migration_map里已有记录的gpid&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
-          <mxGeometry x="1720.4300000000003" y="2983" width="216.75" height="74" as="geometry" />
+        <mxCell id="0hxDmn6Wgr_d0VM1-wjn-117" value="从partitions中选择对应盘符的disk_load值(node_loads[gpid对应的盘符])最大的那一个gpid&lt;br&gt;这里需要跳过&lt;br&gt;&lt;span style=&quot;text-align: center&quot;&gt;(1)migration_map里已有记录的gpid&lt;br&gt;(2)在ordered_address_ids.back()节点里是primary分片的gpid&lt;br&gt;(3)在ordered_address_ids.begin()节点里是secondary分片的gpid&lt;br&gt;&lt;/span&gt;" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;align=left;" vertex="1" parent="1">
+          <mxGeometry x="1720.43" y="2951" width="216.75" height="143" as="geometry" />
         </mxCell>
         <mxCell id="0hxDmn6Wgr_d0VM1-wjn-118" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="0hxDmn6Wgr_d0VM1-wjn-114" target="0hxDmn6Wgr_d0VM1-wjn-117">
           <mxGeometry width="50" height="50" relative="1" as="geometry">
